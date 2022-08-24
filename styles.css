@@ -67,3 +67,14 @@ header h1 {
   height: 50px;
   width: 50px;
 }
+
+#bonus div {
+  width: 30%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+#bonus button {
+  margin-right: 20px;
+  padding: 10px 20px;
+}

@@ -7,7 +7,9 @@ for (let i = 0; i < 100; i++) {
 }
 
 // You may write your code here!
-let curColor;
+let curColor = document.querySelector("#current-color");
+curColor.style.backgroundColor = "white";
+
 // colors
 const colors = document.querySelectorAll(".color");
 for (let color of colors) {
@@ -15,7 +17,6 @@ for (let color of colors) {
 }
 
 function select(e) {
-  curColor = document.querySelector("#current-color");
   curColor.style.backgroundColor = e.target.style.backgroundColor;
 }
 
@@ -26,6 +27,52 @@ for (let cell of cells) {
 }
 
 function paint(e) {
-  console.log(e.target);
   e.target.style.backgroundColor = curColor.style.backgroundColor;
+}
+
+// bonus
+const resetBtn = document.querySelector("#reset");
+const paintAllBtn = document.querySelector("#paint-all");
+const oneRandomBtn = document.querySelector("#one-random");
+const allRandomBtn = document.querySelector("#all-random");
+
+resetBtn.addEventListener("click", (e) => {
+  curColor.style.backgroundColor = "white";
+  paintAll("white");
+});
+
+paintAllBtn.addEventListener("click", () => {
+  paintAll(curColor.style.backgroundColor);
+});
+
+oneRandomBtn.addEventListener("click", () => {
+  let color = randomColor();
+  curColor.style.backgroundColor = color;
+  paintAll(color);
+});
+
+allRandomBtn.addEventListener("click", () => {
+  paintAll(null, false);
+});
+
+function randomColor() {
+  const colors = [
+    "black",
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "purple",
+    "white",
+  ];
+  const random = Math.floor(Math.random() * colors.length);
+  return colors[random];
+}
+
+function paintAll(color, isOneRandomColor = true) {
+  const cells = document.querySelectorAll(".cell");
+  for (let cell of cells) {
+    cell.style.backgroundColor = isOneRandomColor ? color : randomColor();
+  }
 }
